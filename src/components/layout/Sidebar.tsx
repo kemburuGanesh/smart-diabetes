@@ -24,7 +24,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ className }) => {
-  const { user, logout } = useAuth();
+  const { user, profile, logout } = useAuth();
   const { alerts } = useHealthData();
   const navigate = useNavigate();
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -109,14 +109,14 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
         {!isCollapsed && (
           <div className="flex items-center gap-3 mb-4 p-2 rounded-lg bg-sidebar-accent/50">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-semibold">
-              {user?.name?.charAt(0).toUpperCase() || 'U'}
+              {profile?.full_name?.charAt(0).toUpperCase() || 'U'}
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-sidebar-foreground truncate">
-                {user?.name || 'User'}
+                {profile?.full_name || 'User'}
               </p>
               <p className="text-xs text-sidebar-foreground/60 truncate capitalize">
-                {user?.role || 'Doctor'}
+                {profile?.role || 'Doctor'}
               </p>
             </div>
           </div>

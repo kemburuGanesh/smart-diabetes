@@ -34,7 +34,7 @@ import { Link } from 'react-router-dom';
 
 const DashboardPage: React.FC = () => {
   const { patients, alerts, healthMetrics } = useHealthData();
-  const { user } = useAuth();
+  const { profile } = useAuth();
 
   const criticalPatients = patients.filter(p => p.status === 'critical').length;
   const monitoringPatients = patients.filter(p => p.status === 'monitoring').length;
@@ -98,7 +98,7 @@ const DashboardPage: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold">
-            Welcome back, <span className="text-gradient">{user?.name || 'Doctor'}</span>
+            Welcome back, <span className="text-gradient">{profile?.full_name || 'Doctor'}</span>
           </h1>
           <p className="text-muted-foreground mt-1">
             Here's what's happening with your patients today.
