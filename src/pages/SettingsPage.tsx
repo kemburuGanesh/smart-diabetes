@@ -28,11 +28,11 @@ import {
 import { useToast } from '@/hooks/use-toast';
 
 const SettingsPage: React.FC = () => {
-  const { user } = useAuth();
+  const { user, profile: authProfile } = useAuth();
   const { toast } = useToast();
 
-  const [profile, setProfile] = useState({
-    name: user?.name || '',
+  const [profileForm, setProfileForm] = useState({
+    name: authProfile?.full_name || '',
     email: user?.email || '',
     phone: '+1 234-567-8900',
     hospital: 'General Hospital',
@@ -114,7 +114,7 @@ const SettingsPage: React.FC = () => {
             <CardContent className="space-y-6">
               <div className="flex items-center gap-6">
                 <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-3xl font-bold text-primary-foreground">
-                  {profile.name.charAt(0).toUpperCase()}
+                  {profileForm.name.charAt(0).toUpperCase() || 'U'}
                 </div>
                 <div>
                   <Button variant="outline" size="sm">Change Photo</Button>
@@ -131,8 +131,8 @@ const SettingsPage: React.FC = () => {
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
                       id="name"
-                      value={profile.name}
-                      onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+                      value={profileForm.name}
+                      onChange={(e) => setProfileForm({ ...profileForm, name: e.target.value })}
                       className="pl-10"
                     />
                   </div>
@@ -145,8 +145,8 @@ const SettingsPage: React.FC = () => {
                     <Input
                       id="email"
                       type="email"
-                      value={profile.email}
-                      onChange={(e) => setProfile({ ...profile, email: e.target.value })}
+                      value={profileForm.email}
+                      onChange={(e) => setProfileForm({ ...profileForm, email: e.target.value })}
                       className="pl-10"
                     />
                   </div>
@@ -158,8 +158,8 @@ const SettingsPage: React.FC = () => {
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
                       id="phone"
-                      value={profile.phone}
-                      onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+                      value={profileForm.phone}
+                      onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
                       className="pl-10"
                     />
                   </div>
@@ -171,8 +171,8 @@ const SettingsPage: React.FC = () => {
                     <Building className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
                       id="hospital"
-                      value={profile.hospital}
-                      onChange={(e) => setProfile({ ...profile, hospital: e.target.value })}
+                      value={profileForm.hospital}
+                      onChange={(e) => setProfileForm({ ...profileForm, hospital: e.target.value })}
                       className="pl-10"
                     />
                   </div>
@@ -181,8 +181,8 @@ const SettingsPage: React.FC = () => {
                 <div className="space-y-2 md:col-span-2">
                   <Label htmlFor="department">Department</Label>
                   <Select
-                    value={profile.department}
-                    onValueChange={(value) => setProfile({ ...profile, department: value })}
+                    value={profileForm.department}
+                    onValueChange={(value) => setProfileForm({ ...profileForm, department: value })}
                   >
                     <SelectTrigger>
                       <SelectValue />
