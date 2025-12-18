@@ -14,7 +14,244 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ai_diagnoses: {
+        Row: {
+          confidence: number | null
+          created_at: string
+          diagnosed_by: string | null
+          feature_importance: Json | null
+          health_record_id: string | null
+          id: string
+          model_version: string | null
+          patient_id: string
+          prediction: string
+          recommendations: string[] | null
+          risk_level: string
+          risk_score: number
+        }
+        Insert: {
+          confidence?: number | null
+          created_at?: string
+          diagnosed_by?: string | null
+          feature_importance?: Json | null
+          health_record_id?: string | null
+          id?: string
+          model_version?: string | null
+          patient_id: string
+          prediction: string
+          recommendations?: string[] | null
+          risk_level: string
+          risk_score: number
+        }
+        Update: {
+          confidence?: number | null
+          created_at?: string
+          diagnosed_by?: string | null
+          feature_importance?: Json | null
+          health_record_id?: string | null
+          id?: string
+          model_version?: string | null
+          patient_id?: string
+          prediction?: string
+          recommendations?: string[] | null
+          risk_level?: string
+          risk_score?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_diagnoses_health_record_id_fkey"
+            columns: ["health_record_id"]
+            isOneToOne: false
+            referencedRelation: "health_records"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ai_diagnoses_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      alerts: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          is_read: boolean | null
+          message: string
+          patient_id: string
+          severity: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          is_read?: boolean | null
+          message: string
+          patient_id: string
+          severity: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          is_read?: boolean | null
+          message?: string
+          patient_id?: string
+          severity?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "alerts_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      health_records: {
+        Row: {
+          age: number | null
+          blood_pressure_diastolic: number | null
+          blood_pressure_systolic: number | null
+          bmi: number | null
+          diabetes_pedigree: number | null
+          glucose_level: number | null
+          hba1c: number | null
+          id: string
+          insulin_level: number | null
+          notes: string | null
+          patient_id: string
+          pregnancies: number | null
+          recorded_at: string
+          recorded_by: string | null
+          skin_thickness: number | null
+        }
+        Insert: {
+          age?: number | null
+          blood_pressure_diastolic?: number | null
+          blood_pressure_systolic?: number | null
+          bmi?: number | null
+          diabetes_pedigree?: number | null
+          glucose_level?: number | null
+          hba1c?: number | null
+          id?: string
+          insulin_level?: number | null
+          notes?: string | null
+          patient_id: string
+          pregnancies?: number | null
+          recorded_at?: string
+          recorded_by?: string | null
+          skin_thickness?: number | null
+        }
+        Update: {
+          age?: number | null
+          blood_pressure_diastolic?: number | null
+          blood_pressure_systolic?: number | null
+          bmi?: number | null
+          diabetes_pedigree?: number | null
+          glucose_level?: number | null
+          hba1c?: number | null
+          id?: string
+          insulin_level?: number | null
+          notes?: string | null
+          patient_id?: string
+          pregnancies?: number | null
+          recorded_at?: string
+          recorded_by?: string | null
+          skin_thickness?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "health_records_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      patients: {
+        Row: {
+          address: string | null
+          age: number
+          contact: string | null
+          created_at: string
+          created_by: string | null
+          email: string | null
+          gender: string
+          id: string
+          medical_history: string | null
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          age: number
+          contact?: string | null
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          gender: string
+          id?: string
+          medical_history?: string | null
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          age?: number
+          contact?: string | null
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          gender?: string
+          id?: string
+          medical_history?: string | null
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          role: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          role?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          role?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
